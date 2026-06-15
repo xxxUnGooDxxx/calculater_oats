@@ -189,11 +189,29 @@
   .empty{color:var(--gray-t);font-size:13px;padding:14px 0;text-align:center}
 
   /* final */
-  .final-tot{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:24px}
+  /* Длительный контракт */
+  .contract{background:#fff;border:1.5px solid var(--gray-2);border-radius:16px;padding:18px 20px;margin-bottom:18px}
+  .contract-title{font-size:16px;font-weight:800;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+  .ct-tag{font-size:11px;font-weight:800;background:var(--yellow);color:#1d1d1d;padding:3px 9px;border-radius:20px;letter-spacing:.2px}
+  .contract-sub{font-size:12.5px;color:var(--gray-t);margin-top:5px;max-width:560px}
+  .cp-opts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:16px}
+  @media(max-width:560px){.cp-opts{grid-template-columns:repeat(2,minmax(0,1fr))}}
+  .cp{display:flex;flex-direction:column;align-items:center;gap:3px;border:1.5px solid var(--gray-2);background:#fff;border-radius:12px;padding:12px 8px;cursor:pointer;font-family:var(--font);font-size:14px;font-weight:700;color:var(--black);transition:.15s}
+  .cp small{font-size:11.5px;font-weight:700;color:var(--gray-t)}
+  .cp:hover{border-color:var(--yellow-d)}
+  .cp.on{border-color:var(--yellow);background:#fffdf0;box-shadow:0 0 0 3px rgba(255,204,0,.25)}
+  .cp.on small{color:#b58a00}
+
+  .final-tot{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:14px;margin-bottom:14px}
   @media(max-width:560px){.final-tot{grid-template-columns:1fr}}
   .tot-box{border-radius:14px;padding:20px;color:#fff}
   .tot-box.m{background:linear-gradient(135deg,#1d1d1d,#3a3a3a)}
   .tot-box.o{background:linear-gradient(135deg,#caa400,#ffcc00);color:var(--black)}
+  .tot-box.g{background:linear-gradient(135deg,#5a5a5a,#7a7a7a)}
+  .tot-box .tb-sub{font-size:11.5px;font-weight:600;opacity:.8;margin-top:4px}
+  .contract-save{background:#eafaef;border:1px solid #b6e6c6;color:#1f7a44;border-radius:12px;padding:12px 16px;font-size:14px;font-weight:600;margin-bottom:20px}
+  .contract-save b{font-weight:800;font-size:15px}
+  table.det tr.save td{color:#1f7a44;background:#eafaef!important;font-weight:800}
   .tot-box .l{font-size:13px;opacity:.8;text-transform:uppercase;letter-spacing:.5px}
   .tot-box .v{font-size:32px;font-weight:800;margin-top:4px}
   .tot-box .v small{font-size:15px;font-weight:600;opacity:.7}
@@ -297,13 +315,17 @@
     .print-head .ph-date{font-size:11px;color:#777;text-align:right;margin-top:3px}
 
     /* totals */
-    .final-tot{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:18px}
+    .final-tot{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:14px}
     .tot-box{border-radius:10px;padding:14px 16px}
     .tot-box.m{background:#1d1d1d!important;color:#fff!important}
     .tot-box.o{background:var(--yellow)!important;color:#1d1d1d!important}
+    .tot-box.g{background:#6a6a6a!important;color:#fff!important}
     .tot-box .l{font-size:10px}
-    .tot-box .v{font-size:23px}
-    .tot-box .v small{font-size:12px}
+    .tot-box .v{font-size:21px}
+    .tot-box .v small{font-size:11px}
+    .tot-box .tb-sub{font-size:9.5px}
+    .contract-save{background:#eafaef!important;border:1px solid #b6e6c6;color:#1f7a44!important;border-radius:8px;padding:9px 13px;font-size:12px;margin-bottom:14px}
+    table.det tr.save td{background:#eafaef!important;color:#1f7a44!important}
 
     /* table */
     table.det{font-size:11.5px}
@@ -593,16 +615,23 @@
         <h2>Шаг 5. Итоговый расчёт</h2>
         <p class="hint">Итоговая стоимость вашей конфигурации Облачной АТС.</p>
 
-        <div class="final-tot">
-          <div class="tot-box m">
-            <div class="l">Ежемесячно</div>
-            <div class="v" id="final-month">0 <small>₽/мес</small></div>
+        <div class="contract noprint">
+          <div class="contract-head">
+            <div>
+              <div class="contract-title">Длительный контракт <span class="ct-tag">выгода до 20%</span></div>
+              <div class="contract-sub">Скидка на тариф и запись разговоров при оплате авансом за период. Остальные услуги — обычными ежемесячными платежами.</div>
+            </div>
           </div>
-          <div class="tot-box o">
-            <div class="l">Разовый платёж</div>
-            <div class="v" id="final-once">0 <small>₽</small></div>
+          <div class="cp-opts" id="cp-opts">
+            <button type="button" class="cp on" data-m="1">Помесячно<small>без скидки</small></button>
+            <button type="button" class="cp" data-m="6">6 месяцев<small>−10%</small></button>
+            <button type="button" class="cp" data-m="9">9 месяцев<small>−15%</small></button>
+            <button type="button" class="cp" data-m="12">12 месяцев<small>−20%</small></button>
           </div>
         </div>
+
+        <div class="final-tot" id="final-tot"></div>
+        <div class="contract-save" id="contract-save" style="display:none"></div>
 
         <table class="det" id="det-table"><tbody></tbody></table>
 
@@ -714,7 +743,12 @@ const S = {
   smsPack:'', smsQty:1,
   saPack:'', vcPack:'', vrPack:'',
   ccPeriod:'', ccUsers:1,
+  contract:1, // 1 = помесячно, иначе 6/9/12 мес
 };
+
+// Длительный контракт: срок -> скидка на (тариф + запись разговоров), оплата авансом
+const CONTRACT = {1:0, 6:0.10, 9:0.15, 12:0.20};
+const REC_PRICE = 1525; // запись разговоров, ₽/мес
 
 /* ---------------- HELPERS ---------------- */
 const fmt = n => n.toLocaleString('ru-RU',{minimumFractionDigits:(n%1?2:0),maximumFractionDigits:2});
@@ -769,15 +803,15 @@ function compute(){
   const groups = []; // {title, items:[{name, amount, type}]}
   const p = plan();
   let mTotal=0, oTotal=0;
-  const add = (title, name, amount, type='m') => {
+  const add = (title, name, amount, type='m', contractable=false) => {
     let g = groups.find(x=>x.title===title);
     if(!g){g={title,items:[]};groups.push(g);}
-    g.items.push({name,amount,type});
+    g.items.push({name,amount,type,contractable});
     if(type==='m') mTotal+=amount; else oTotal+=amount;
   };
 
   // Tariff
-  add('Тариф', p.name+' (абон. плата)', p.fee, 'm');
+  add('Тариф', p.name+' (абон. плата)', p.fee, 'm', true);
   const exN = Math.max(0,S.numbers-p.numbers); if(exN>0) add('Тариф',`Доп. номера × ${exN}`, exN*EXTRA_NUMBER,'m');
   const exE = Math.max(0,S.employees-p.employees); if(exE>0) add('Тариф',`Доп. сотрудники × ${exE}`, exE*EXTRA_EMPLOYEE,'m');
   if(S.lines>0) add('Тариф',`Доп. линии разговоров × ${S.lines}`, S.lines*p.extraLine,'m');
@@ -787,7 +821,7 @@ function compute(){
   ATC_OPTIONS.forEach(o=>{
     const price = o.price==='sip'? p.sip : o.price;
     if(o.qty){ const q=S.atcQty[o.id]||0; if(q>0) add('Опции АТС',`${o.name} × ${q}`, q*price,'m'); }
-    else if(S.atc[o.id]) add('Опции АТС', o.name, price,'m');
+    else if(S.atc[o.id]) add('Опции АТС', o.name, price,'m', o.id==='rec');
   });
 
   // Track
@@ -858,19 +892,58 @@ function refresh(){
     `).join('');
   }
 
-  // final
-  $('#final-month').innerHTML = fmt(mTotal)+' <small>₽/мес</small>';
-  $('#final-once').innerHTML  = fmt(oTotal)+' <small>₽</small>';
+  // ----- Длительный контракт -----
+  const months = S.contract||1;
+  const disc = CONTRACT[months]||0;
+  const active = months>1 && disc>0;
+  let baseMonthly = 0;            // тариф + запись (то, что под контрактом)
+  groups.forEach(g=>g.items.forEach(it=>{ if(it.contractable && it.type==='m') baseMonthly+=it.amount; }));
+  const contractFull   = baseMonthly*months;             // без скидки за период
+  const contractUpfront= active ? contractFull*(1-disc) : 0;  // аванс со скидкой
+  const savings        = active ? contractFull*disc : 0;
+  const restMonthly    = mTotal - (active ? baseMonthly : 0);
+
+  // подсветка активной кнопки контракта
+  $$('#cp-opts .cp').forEach(b=> b.classList.toggle('on', (+b.dataset.m)===months));
+
+  // плашки итога
+  let boxes;
+  if(active){
+    boxes = `
+      <div class="tot-box o"><div class="l">Аванс по контракту · ${months} мес</div><div class="v">${fmt(contractUpfront)} <small>₽</small></div><div class="tb-sub">тариф + запись · −${Math.round(disc*100)}%</div></div>
+      <div class="tot-box m"><div class="l">Ежемесячно (допы)</div><div class="v">${fmt(restMonthly)} <small>₽/мес</small></div></div>`;
+    if(oTotal>0) boxes += `<div class="tot-box g"><div class="l">Разовые платежи</div><div class="v">${fmt(oTotal)} <small>₽</small></div></div>`;
+  } else {
+    boxes = `
+      <div class="tot-box m"><div class="l">Ежемесячно</div><div class="v">${fmt(mTotal)} <small>₽/мес</small></div></div>
+      <div class="tot-box o"><div class="l">Разовый платёж</div><div class="v">${fmt(oTotal)} <small>₽</small></div></div>`;
+  }
+  $('#final-tot').innerHTML = boxes;
+  $('#contract-save').innerHTML = active
+    ? `Выгода по контракту на ${months} мес: <b>−${fmt(savings)} ₽</b> (${Math.round(disc*100)}%)`
+    : '';
+  $('#contract-save').style.display = active ? 'block' : 'none';
+
+  // детализация
   const tb = $('#det-table').querySelector('tbody');
   let rows='';
+  if(active){
+    rows+=`<tr class="cat"><td colspan="2">Контракт — аванс за ${months} мес</td></tr>`;
+    groups.forEach(g=>g.items.forEach(it=>{ if(it.contractable && it.type==='m') rows+=`<tr><td>${it.name} × ${months} мес</td><td>${fmt(it.amount*months)} ₽</td></tr>`; }));
+    rows+=`<tr><td>Скидка по контракту −${Math.round(disc*100)}%</td><td>−${fmt(savings)} ₽</td></tr>`;
+    rows+=`<tr class="cat"><td>Итого аванс за ${months} мес</td><td>${fmt(contractUpfront)} ₽</td></tr>`;
+  }
   groups.forEach(g=>{
+    const items = g.items.filter(it=> !(active && it.contractable && it.type==='m'));
+    if(items.length===0) return;
     rows+=`<tr class="cat"><td colspan="2">${g.title}</td></tr>`;
-    g.items.forEach(it=>{
+    items.forEach(it=>{
       rows+=`<tr><td>${it.name} <span style="color:var(--gray-t);font-size:11px">${it.type==='o'?'разово':'/мес'}</span></td><td>${fmt(it.amount)} ₽</td></tr>`;
     });
   });
-  rows+=`<tr class="cat"><td>Итого ежемесячно</td><td>${fmt(mTotal)} ₽/мес</td></tr>`;
+  rows+=`<tr class="cat"><td>Итого ежемесячно${active?' (допы)':''}</td><td>${fmt(active?restMonthly:mTotal)} ₽/мес</td></tr>`;
   if(oTotal>0) rows+=`<tr class="cat"><td>Итого разово</td><td>${fmt(oTotal)} ₽</td></tr>`;
+  if(active) rows+=`<tr class="cat save"><td>Экономия по контракту за ${months} мес</td><td>−${fmt(savings)} ₽</td></tr>`;
   tb.innerHTML = rows || '<tr><td colspan="2" class="empty">Ничего не выбрано</td></tr>';
 
   saveState();
@@ -896,6 +969,9 @@ function goStep(n){
 
 /* ---------------- EVENTS ---------------- */
 document.addEventListener('click', e=>{
+  // contract period
+  const cp = e.target.closest('.cp');
+  if(cp){ S.contract = +cp.dataset.m; track('contract_'+S.contract); refresh(); return; }
   // tariff select
   const tc = e.target.closest('[data-plan]');
   if(tc){
