@@ -899,10 +899,15 @@ document.addEventListener('click', e=>{
   // tariff select
   const tc = e.target.closest('[data-plan]');
   if(tc){
-    S.plan=tc.dataset.plan;
-    const p=plan();
-    if(S.numbers<p.numbers) S.numbers=p.numbers; $('#i-numbers').value=S.numbers;
-    if(S.employees<p.employees) S.employees=p.employees; $('#i-employees').value=S.employees;
+    const old = plan();
+    S.plan = tc.dataset.plan;
+    const p = plan();
+    // Снап к пакету тарифа: если значение не было увеличено вручную сверх старого
+    // пакета (или ниже нового минимума) — равняем на пакет выбранного тарифа.
+    if(S.numbers === old.numbers || S.numbers < p.numbers) S.numbers = p.numbers;
+    if(S.employees === old.employees || S.employees < p.employees) S.employees = p.employees;
+    $('#i-numbers').value = S.numbers;
+    $('#i-employees').value = S.employees;
     renderTariffs(); renderAtc(); refresh(); return;
   }
   // stepper +/-
