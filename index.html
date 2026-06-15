@@ -25,6 +25,20 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=109853120', 'ym');
+
+    ym(109853120, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/109853120" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
 <style>
   :root{
     --yellow:#ffcc00;
@@ -704,6 +718,8 @@ const S = {
 
 /* ---------------- HELPERS ---------------- */
 const fmt = n => n.toLocaleString('ru-RU',{minimumFractionDigits:(n%1?2:0),maximumFractionDigits:2});
+const YM_ID = 109853120;
+const track = (goal,params) => { try{ if(window.ym) ym(YM_ID,'reachGoal',goal,params); }catch(e){} };
 const plan = () => PLANS.find(p=>p.id===S.plan);
 const $ = s => document.querySelector(s);
 const $$ = s => document.querySelectorAll(s);
@@ -875,6 +891,7 @@ function goStep(n){
   $('#btn-next').textContent = cur===LAST? '🖨 Печать / PDF' : 'Далее →';
   window.scrollTo({top:0,behavior:'smooth'});
   saveState();
+  if(inited) track('step_'+(cur+1));
 }
 
 /* ---------------- EVENTS ---------------- */
@@ -932,7 +949,7 @@ function applyNum(key,v){
   }
 }
 
-$('#btn-next').addEventListener('click', ()=>{ if(cur===LAST){window.print();} else goStep(cur+1); });
+$('#btn-next').addEventListener('click', ()=>{ if(cur===LAST){ track('print', {month: compute().mTotal, once: compute().oTotal}); window.print(); } else goStep(cur+1); });
 $('#btn-prev').addEventListener('click', ()=> goStep(cur-1));
 
 /* ---------------- TOOLTIPS ---------------- */
