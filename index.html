@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Калькулятор Облачной АТС — билайн бизнес</title>
+<meta name="description" content="Пошаговый калькулятор стоимости Облачной АТС билайн: тарифы, номера, сотрудники, опции и сервисы. Рассчитайте цену виртуальной телефонии для бизнеса за 5 минут.">
+<!-- Open Graph / соцсети и мессенджеры. URL под GitHub Pages этого репозитория -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="билайн бизнес">
+<meta property="og:title" content="Калькулятор Облачной АТС — билайн бизнес">
+<meta property="og:description" content="Рассчитайте стоимость виртуальной телефонии для бизнеса за 5 минут: тарифы, номера, опции и сервисы.">
+<meta property="og:url" content="https://xxxungoodxxx.github.io/calculater_oats/">
+<meta property="og:image" content="https://xxxungoodxxx.github.io/calculater_oats/assets/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Калькулятор Облачной АТС билайн бизнес">
+<meta property="og:locale" content="ru_RU">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Калькулятор Облачной АТС — билайн бизнес">
+<meta name="twitter:description" content="Рассчитайте стоимость виртуальной телефонии для бизнеса за 5 минут.">
+<meta name="twitter:image" content="https://xxxungoodxxx.github.io/calculater_oats/assets/og-image.png">
+<link rel="icon" href="assets/favicon.ico">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon2.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --yellow:#ffcc00;
+    --yellow-d:#ffd633;
+    --black:#1d1d1d;
+    --gray:#f3f3f3;
+    --gray-2:#e7e7e7;
+    --gray-t:#8a8a8a;
+    --green:#27ae60;
+    --radius:16px;
+    --shadow:0 6px 24px rgba(0,0,0,.08);
+    --font:'Inter','Segoe UI',system-ui,-apple-system,Roboto,Arial,sans-serif;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:var(--font);background:var(--gray);color:var(--black);line-height:1.45;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;overflow-x:clip;overflow-wrap:break-word}
+  a{color:inherit}
+  .wrap{max-width:1180px;margin:0 auto;padding:24px 20px 80px}
+
+  /* Header */
+  header.top{display:flex;align-items:center;gap:14px;padding:14px 0 28px}
+  .logo{display:inline-flex;align-items:center}
+  .logo img{display:block;height:30px;width:auto}
+  header.top .sub{color:var(--gray-t);font-size:13.5px;margin-left:auto;text-align:right;line-height:1.4}
+
+  h1{font-size:36px;font-weight:800;letter-spacing:-1px;margin-bottom:10px;line-height:1.08}
+  .lead{color:#5a5a5a;font-size:15px;margin-bottom:0;max-width:560px}
+
+  /* Hero */
+  .hero{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);border-radius:24px;overflow:hidden;box-shadow:var(--shadow);margin-bottom:32px;background:#fff}
+  @media(max-width:820px){.hero{grid-template-columns:minmax(0,1fr)}}
+  .hero-l,.hero-r{min-width:0}
+  .hero-l{background:linear-gradient(135deg,#fffdf5 0%,#fff4cc 100%);padding:38px 40px;position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:center}
+  .hero-ball{position:absolute;right:-46px;top:-46px;width:190px;height:190px;opacity:.5;filter:drop-shadow(0 8px 22px rgba(0,0,0,.18));pointer-events:none}
+  .hero-badge{display:inline-flex;align-self:flex-start;background:var(--black);color:#fff;font-size:11.5px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;padding:7px 14px;border-radius:30px;margin-bottom:18px;position:relative}
+  .hero-stats{display:flex;gap:14px;margin-top:26px;position:relative}
+  .hero-stats .hs{flex:1;background:rgba(255,255,255,.6);backdrop-filter:blur(4px);border:1px solid rgba(0,0,0,.06);border-radius:14px;padding:16px 12px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
+  .hero-stats .hs b{font-size:24px;font-weight:800;letter-spacing:-.5px;line-height:1}
+  .hero-stats .hs span{font-size:12px;color:var(--gray-t);margin-top:6px;font-weight:500}
+  .hero-r{background:radial-gradient(120% 120% at 100% 0%,#2c2c2c 0%,#1a1a1a 60%);padding:24px 30px;display:flex;flex-direction:column;justify-content:center;gap:2px}
+  .hero-r .feat{display:flex;align-items:center;gap:15px;padding:13px 0;border-bottom:1px solid rgba(255,255,255,.08)}
+  .hero-r .feat:last-child{border-bottom:0}
+  .hero-r .fi{width:46px;height:46px;border-radius:13px;background:var(--yellow);display:flex;align-items:center;justify-content:center;flex-shrink:0;color:var(--black);align-self:center}
+  .hero-r .fi svg{width:23px;height:23px;display:block}
+  .hero-r .ft{display:flex;flex-direction:column;justify-content:center}
+  .hero-r .feat b{color:#fff;font-size:15px;font-weight:700;letter-spacing:-.2px;line-height:1.25}
+  .hero-r .feat span{color:#9a9a9a;font-size:12.5px;margin-top:3px;font-weight:400;line-height:1.3}
+
+  /* Layout */
+  .grid{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:26px;align-items:start}
+  @media(max-width:900px){.grid{grid-template-columns:1fr}}
+
+  /* Steps progress */
+  .steps{display:flex;gap:8px;margin-bottom:26px;flex-wrap:wrap}
+  .steps .st{flex:1;min-width:120px;background:#fff;border-radius:12px;padding:12px 14px;font-size:13px;font-weight:600;color:var(--gray-t);display:flex;align-items:center;gap:10px;cursor:pointer;border:2px solid transparent;transition:.15s;user-select:none}
+  .steps .st .n{width:24px;height:24px;border-radius:50%;background:var(--gray-2);color:var(--black);display:flex;align-items:center;justify-content:center;font-weight:800;flex-shrink:0;font-size:13px}
+  .steps .st.active{border-color:var(--yellow);color:var(--black);box-shadow:var(--shadow)}
+  .steps .st.active .n{background:var(--yellow)}
+  .steps .st.done .n{background:var(--green);color:#fff}
+
+  /* Cards / panel */
+  .panel{background:#fff;border-radius:var(--radius);padding:26px;box-shadow:var(--shadow)}
+  .step{display:none}
+  .step.active{display:block;animation:fade .25s ease}
+  @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+  .step h2{font-size:21px;margin-bottom:4px}
+  .step .hint{color:var(--gray-t);font-size:14px;margin-bottom:22px}
+
+  .block{margin-bottom:30px}
+  .block-title{font-size:13px;text-transform:uppercase;letter-spacing:.6px;color:var(--gray-t);font-weight:700;margin-bottom:14px;border-bottom:1px solid var(--gray-2);padding-bottom:8px}
+
+  /* Tariff cards */
+  .tariffs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+  @media(max-width:680px){.tariffs{grid-template-columns:repeat(2,minmax(0,1fr))}}
+  .tcard{border:2px solid var(--gray-2);border-radius:14px;padding:16px 14px;cursor:pointer;transition:.15s;position:relative;background:#fff}
+  .tcard:hover{border-color:var(--yellow-d)}
+  .tcard.sel{border-color:var(--yellow);background:#fffdf0;box-shadow:0 0 0 3px rgba(255,204,0,.25)}
+  .tcard .nm{font-weight:800;font-size:15px;margin-bottom:8px}
+  .tcard .pr{font-size:20px;font-weight:800;margin-bottom:2px}
+  .tcard .pr small{font-size:12px;color:var(--gray-t);font-weight:600}
+  .tcard ul{list-style:none;margin-top:12px;font-size:12.5px;color:#555}
+  .tcard ul li{display:flex;justify-content:space-between;padding:3px 0;border-top:1px dashed var(--gray-2)}
+  .tcard ul li b{font-weight:700;color:var(--black)}
+
+  /* form rows */
+  .row{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:13px 0;border-bottom:1px solid var(--gray-2)}
+  .row:last-child{border-bottom:0}
+  .row .lbl{font-size:14.5px}
+  .row .lbl .d{font-size:12.5px;color:var(--gray-t);margin-top:2px}
+  .row .ctl{display:flex;align-items:center;gap:12px;flex-shrink:0}
+  .price-tag{font-size:13px;color:var(--gray-t);min-width:96px;text-align:right}
+
+  /* stepper */
+  .stepper{display:inline-flex;align-items:center;border:1.5px solid var(--gray-2);border-radius:10px;overflow:hidden}
+  .stepper button{width:34px;height:34px;border:0;background:var(--gray);font-size:18px;font-weight:700;cursor:pointer;color:var(--black)}
+  .stepper button:hover{background:var(--yellow-d)}
+  .stepper input{width:50px;height:34px;border:0;text-align:center;font-size:15px;font-weight:700;font-family:var(--font);outline:none;-moz-appearance:textfield}
+  .stepper input::-webkit-outer-spin-button,.stepper input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+
+  /* switch */
+  .switch{position:relative;width:46px;height:26px;flex-shrink:0}
+  .switch input{opacity:0;width:0;height:0}
+  .slider{position:absolute;inset:0;background:var(--gray-2);border-radius:30px;transition:.2s;cursor:pointer}
+  .slider:before{content:"";position:absolute;width:20px;height:20px;left:3px;top:3px;background:#fff;border-radius:50%;transition:.2s;box-shadow:0 1px 3px rgba(0,0,0,.3)}
+  .switch input:checked + .slider{background:var(--yellow)}
+  .switch input:checked + .slider:before{transform:translateX(20px)}
+
+  select{font-family:var(--font);font-size:14px;font-weight:600;padding:8px 12px;border:1.5px solid var(--gray-2);border-radius:10px;background:#fff;cursor:pointer;outline:none;min-width:150px}
+  select:focus{border-color:var(--yellow)}
+
+  .note{background:#fffae0;border:1px solid #ffe680;border-radius:10px;padding:10px 14px;font-size:12.5px;color:#7a6500;margin-top:10px}
+
+  /* reset bar */
+  .resetbar{display:flex;align-items:center;justify-content:flex-end;gap:12px;margin:-14px 0 16px}
+  .saved-note{font-size:12px;color:var(--green);font-weight:600}
+  .resetbtn{background:none;border:1.5px solid var(--gray-2);color:var(--gray-t);font-size:12.5px;font-weight:700;cursor:pointer;font-family:var(--font);padding:6px 12px;border-radius:9px;transition:.15s}
+  .resetbtn:hover{color:var(--black);border-color:var(--black)}
+
+  /* help icon + tooltip */
+  .lt{display:inline-flex;align-items:center;gap:7px}
+  .help{display:inline-flex;align-items:center;justify-content:center;width:18px;height:18px;border-radius:50%;border:1.5px solid var(--gray-2);background:#fff;color:var(--gray-t);font-size:11px;font-weight:800;cursor:pointer;flex-shrink:0;line-height:1;font-family:var(--font);transition:.15s;padding:0}
+  .help:hover,.help.on{border-color:var(--yellow);color:var(--black);background:var(--yellow)}
+  .tip{position:fixed;z-index:90;max-width:280px;background:#1d1d1d;color:#fff;font-size:12.5px;font-weight:400;line-height:1.5;padding:12px 14px;border-radius:12px;box-shadow:0 10px 32px rgba(0,0,0,.3);opacity:0;visibility:hidden;transform:translateY(5px);transition:opacity .15s,transform .15s,visibility .15s;pointer-events:none}
+  .tip.show{opacity:1;visibility:visible;transform:none}
+  .tip b{color:var(--yellow)}
+
+  /* nav buttons */
+  .nav{display:flex;justify-content:space-between;margin-top:26px;gap:12px}
+  .btn{border:0;border-radius:12px;padding:13px 26px;font-size:15px;font-weight:700;cursor:pointer;font-family:var(--font);transition:.15s}
+  .btn-prim{background:var(--yellow);color:var(--black)}
+  .btn-prim:hover{background:var(--yellow-d)}
+  .btn-ghost{background:var(--gray);color:var(--black)}
+  .btn-ghost:hover{background:var(--gray-2)}
+  .btn:disabled{opacity:.4;cursor:not-allowed}
+
+  /* summary sidebar */
+  .summary{position:sticky;top:18px;background:#fff;border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+  .summary .sh{background:var(--black);color:#fff;padding:18px 20px}
+  .summary .sh .t{font-size:13px;color:#bbb;text-transform:uppercase;letter-spacing:.6px}
+  .summary .sh .big{font-size:30px;font-weight:800;margin-top:2px}
+  .summary .sh .big small{font-size:14px;color:#bbb;font-weight:600}
+  .summary .sb{padding:8px 20px 18px;max-height:46vh;overflow:auto}
+  .sline{display:flex;justify-content:space-between;gap:10px;font-size:13px;padding:7px 0;border-bottom:1px dashed var(--gray-2)}
+  .sline .sn{color:#444}
+  .sline .sv{font-weight:700;white-space:nowrap}
+  .sgroup{font-size:11px;text-transform:uppercase;letter-spacing:.5px;color:var(--gray-t);font-weight:700;margin-top:14px;padding-bottom:3px}
+  .summary .onetime{padding:14px 20px;background:var(--gray);border-top:1px solid var(--gray-2);display:flex;justify-content:space-between;font-size:14px}
+  .summary .onetime b{font-size:17px}
+  .empty{color:var(--gray-t);font-size:13px;padding:14px 0;text-align:center}
+
+  /* final */
+  .final-tot{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:24px}
+  @media(max-width:560px){.final-tot{grid-template-columns:1fr}}
+  .tot-box{border-radius:14px;padding:20px;color:#fff}
+  .tot-box.m{background:linear-gradient(135deg,#1d1d1d,#3a3a3a)}
+  .tot-box.o{background:linear-gradient(135deg,#caa400,#ffcc00);color:var(--black)}
+  .tot-box .l{font-size:13px;opacity:.8;text-transform:uppercase;letter-spacing:.5px}
+  .tot-box .v{font-size:32px;font-weight:800;margin-top:4px}
+  .tot-box .v small{font-size:15px;font-weight:600;opacity:.7}
+
+  table.det{width:100%;border-collapse:collapse;font-size:13.5px;margin-top:6px}
+  table.det th{text-align:left;color:var(--gray-t);font-size:11.5px;text-transform:uppercase;letter-spacing:.5px;padding:8px 6px;border-bottom:2px solid var(--gray-2)}
+  table.det td{padding:9px 6px;border-bottom:1px solid var(--gray-2)}
+  table.det td:last-child,table.det th:last-child{text-align:right;font-weight:700;white-space:nowrap}
+  table.det .cat td{background:var(--gray);font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:.5px;color:#555}
+  .disclaim{font-size:11.5px;color:var(--gray-t);margin-top:18px;line-height:1.6}
+
+  /* print head (screen-hidden) */
+  .print-head{display:none}
+  .print-foot{display:none}
+
+  /* ===== Mobile sticky total bar ===== */
+  .mobilebar{display:none}
+
+  /* ===== Tablet ===== */
+  @media(max-width:900px){
+    .summary{display:none}
+    .grid{grid-template-columns:1fr}
+    .mobilebar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:60;background:var(--black);color:#fff;align-items:center;justify-content:space-between;gap:16px;padding:11px 18px;box-shadow:0 -6px 24px rgba(0,0,0,.28)}
+    .mobilebar .mb-l span,.mobilebar .mb-r span{display:block;font-size:10.5px;color:#aaa;text-transform:uppercase;letter-spacing:.5px}
+    .mobilebar .mb-l b{font-size:21px;font-weight:800;line-height:1.1}
+    .mobilebar .mb-r{text-align:right}
+    .mobilebar .mb-r b{font-size:15px;font-weight:800;color:var(--yellow);line-height:1.1}
+    .wrap{padding-bottom:86px}
+  }
+
+  /* ===== Phone ===== */
+  @media(max-width:600px){
+    .wrap{padding:16px 14px 86px}
+    header.top{padding:6px 0 18px}
+    header.top .sub{display:none}
+    .logo img{height:24px}
+
+    .hero{border-radius:18px;margin-bottom:22px}
+    .hero-l{padding:24px 20px}
+    .hero-ball{width:130px;height:130px;right:-30px;top:-30px;opacity:.4}
+    h1{font-size:26px;letter-spacing:-.7px}
+    .lead{font-size:14px}
+    .hero-badge{font-size:10.5px;padding:6px 12px;margin-bottom:14px}
+    .hero-stats{gap:8px;margin-top:20px;flex-wrap:wrap}
+    .hero-stats .hs{padding:12px 6px;min-width:0;flex:1 1 28%}
+    .hero-stats .hs b{font-size:18px}
+    .hero-stats .hs span{font-size:10px;line-height:1.2}
+    .hero-r{padding:18px 20px}
+    .hero-r .feat{padding:11px 0;gap:13px}
+    .hero-r .fi{width:42px;height:42px}
+
+    /* steps: horizontal scroll */
+    .steps{flex-wrap:nowrap;overflow-x:auto;gap:8px;margin-bottom:18px;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:2px}
+    .steps::-webkit-scrollbar{display:none}
+    .steps .st{flex:0 0 auto;min-width:auto;padding:10px 14px;scroll-snap-align:start}
+
+    .panel{padding:20px 16px;border-radius:18px}
+    .step h2{font-size:18px}
+    .step .hint{font-size:13px;margin-bottom:18px}
+
+    .tariffs{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px}
+    .tcard{padding:13px 12px}
+    .tcard .nm{font-size:14px}
+    .tcard .pr{font-size:17px}
+
+    .row{flex-wrap:wrap;gap:8px}
+    .row .ctl{margin-left:auto}
+    .price-tag{min-width:auto;font-size:12px}
+    select{min-width:0;width:100%}
+    .row .ctl select{min-width:160px;width:auto}
+
+    .final-tot{grid-template-columns:1fr}
+    .tot-box .v{font-size:28px}
+    table.det{font-size:12.5px}
+
+    .nav .btn{padding:12px 18px;font-size:14px}
+  }
+
+  @media(max-width:380px){
+    .tariffs{grid-template-columns:1fr}
+    .hero-stats{flex-wrap:wrap}
+    .hero-stats .hs{flex:1 1 40%}
+  }
+
+  @media print{
+    @page{margin:14mm 14mm 16mm}
+    *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    body{background:#fff;font-size:12px}
+    .wrap{max-width:none;padding:0}
+    header.top,.steps,.summary,.mobilebar,.hero,.nav,.tip,.help,.noprint{display:none!important}
+    .grid{display:block}
+    .panel{box-shadow:none;padding:0;border-radius:0}
+    .step{display:none!important}
+    .step.printme{display:block!important}
+    .step.printme h2,.step.printme .hint{display:none!important}
+
+    /* branded header */
+    .print-head{display:flex!important;align-items:flex-end;justify-content:space-between;border-bottom:3px solid var(--yellow);padding-bottom:12px;margin-bottom:22px}
+    .print-head img{height:34px;width:auto}
+    .print-head .ph-title{font-size:17px;font-weight:800;letter-spacing:-.4px;text-align:right}
+    .print-head .ph-date{font-size:11px;color:#777;text-align:right;margin-top:3px}
+
+    /* totals */
+    .final-tot{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:18px}
+    .tot-box{border-radius:10px;padding:14px 16px}
+    .tot-box.m{background:#1d1d1d!important;color:#fff!important}
+    .tot-box.o{background:var(--yellow)!important;color:#1d1d1d!important}
+    .tot-box .l{font-size:10px}
+    .tot-box .v{font-size:23px}
+    .tot-box .v small{font-size:12px}
+
+    /* table */
+    table.det{font-size:11.5px}
+    table.det th{border-bottom:1.5px solid #333}
+    table.det td{padding:6px;border-bottom:1px solid #ddd}
+    table.det .cat td{background:#f3f3f3!important;color:#000;font-weight:800}
+    table.det tr{break-inside:avoid}
+
+    .disclaim{margin-top:14px;font-size:10px;color:#555;border-top:1px solid #ddd;padding-top:10px}
+    .print-foot{display:block!important;margin-top:14px;font-size:10px;color:#888;text-align:center}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <span class="logo">
+      <img src="assets/beeline_business_logo.png" alt="билайн бизнес" height="30">
+    </span>
+    <span class="sub">Калькулятор Облачной АТС<br>прайс 01-26 · цены с НДС</span>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-l">
+      <img src="assets/beeline_logo.svg" class="hero-ball" alt="" aria-hidden="true">
+      <span class="hero-badge">Виртуальная телефония для бизнеса</span>
+      <h1>Облачная АТС билайн</h1>
+      <p class="lead">Полноценная телефонная сеть компании без «железа» и проводов: многоканальные номера, голосовое меню, запись разговоров, интеграция с CRM и сквозная аналитика — всё в личном кабинете. Соберите конфигурацию по шагам и узнайте точную стоимость.</p>
+      <div class="hero-stats">
+        <div class="hs"><b>4</b><span>тарифных плана</span></div>
+        <div class="hs"><b>до&nbsp;100</b><span>каналов связи</span></div>
+        <div class="hs"><b>~5&nbsp;мин</b><span>на расчёт</span></div>
+      </div>
+    </div>
+    <div class="hero-r">
+      <div class="feat">
+        <span class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2a9 9 0 0 1 9 9"/><path d="M13 6a5 5 0 0 1 5 5"/><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg></span>
+        <div class="ft"><b>Многоканальные номера</b><span>Городские и 8-800, без потери звонков</span></div>
+      </div>
+      <div class="feat">
+        <span class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12h-8"/><path d="M21 6H8"/><path d="M21 18h-8"/><path d="M3 6v4c0 1.1.9 2 2 2h3"/><path d="M3 10v6c0 1.1.9 2 2 2h3"/></svg></span>
+        <div class="ft"><b>Голосовое меню и сценарии</b><span>Умное распределение вызовов по отделам</span></div>
+      </div>
+      <div class="feat">
+        <span class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-5a9 9 0 0 1 18 0v5a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3"/></svg></span>
+        <div class="ft"><b>Запись и речевая аналитика</b><span>Контроль качества и анализ разговоров</span></div>
+      </div>
+      <div class="feat">
+        <span class="fi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 17H7A5 5 0 0 1 7 7h2"/><path d="M15 7h2a5 5 0 1 1 0 10h-2"/><line x1="8" x2="16" y1="12" y2="12"/></svg></span>
+        <div class="ft"><b>Интеграция с CRM</b><span>amoCRM, Bitrix24 и другие системы</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- progress -->
+  <div class="steps" id="steps">
+    <div class="st active" data-go="0"><span class="n">1</span> Тариф</div>
+    <div class="st" data-go="1"><span class="n">2</span> Опции АТС</div>
+    <div class="st" data-go="2"><span class="n">3</span> Аналитика</div>
+    <div class="st" data-go="3"><span class="n">4</span> Доп. сервисы</div>
+    <div class="st" data-go="4"><span class="n">5</span> Итог</div>
+  </div>
+
+  <div class="resetbar noprint" id="resetbar" style="display:none"><span class="saved-note">✓ прогресс сохранён</span><button id="reset" class="resetbtn">↻ Начать заново</button></div>
+
+  <div class="grid">
+    <!-- ====== LEFT: steps ====== -->
+    <div class="panel">
+
+      <!-- STEP 1 -->
+      <section class="step active" data-step="0">
+        <h2>Шаг 1. Тарифный план</h2>
+        <p class="hint">Базовый пакет включает номера, сотрудников и каналы. Всё сверх пакета считается отдельно.</p>
+
+        <div class="block">
+          <div class="block-title">Выберите план</div>
+          <div class="tariffs" id="tariffs"></div>
+        </div>
+
+        <div class="block">
+          <div class="block-title">Масштаб</div>
+          <div class="row">
+            <div class="lbl"><span class="lt">Всего многоканальных номеров<button type="button" class="help" data-tip="Один многоканальный номер принимает сразу много звонков — клиенты не слышат «занято» и не уходят к конкурентам." aria-label="Подробнее">?</button></span><div class="d">Сверх пакета — 152,50 ₽/мес за номер</div></div>
+            <div class="ctl"><span class="price-tag" id="pt-num"></span><div class="stepper" data-num="numbers"><button data-d="-1">−</button><input type="number" id="i-numbers" value="2" min="0"><button data-d="1">+</button></div></div>
+          </div>
+          <div class="row">
+            <div class="lbl"><span class="lt">Всего сотрудников<button type="button" class="help" data-tip="Сколько сотрудников смогут принимать и совершать звонки через АТС со своими настройками и статистикой." aria-label="Подробнее">?</button></span><div class="d">Сверх пакета — 203,33 ₽/мес за сотрудника</div></div>
+            <div class="ctl"><span class="price-tag" id="pt-emp"></span><div class="stepper" data-num="employees"><button data-d="-1">−</button><input type="number" id="i-employees" value="4" min="0"><button data-d="1">+</button></div></div>
+          </div>
+          <div class="row">
+            <div class="lbl"><span class="lt">Доп. линии одновременных разговоров<button type="button" class="help" data-tip="Сколько разговоров может идти одновременно. Больше линий — в час пик никто не стоит в очереди на дозвон." aria-label="Подробнее">?</button></span><div class="d" id="d-line">152,50 ₽/мес за линию</div></div>
+            <div class="ctl"><span class="price-tag" id="pt-line"></span><div class="stepper" data-num="lines"><button data-d="-1">−</button><input type="number" id="i-lines" value="0" min="0"><button data-d="1">+</button></div></div>
+          </div>
+          <div class="row">
+            <div class="lbl"><span class="lt">Доп. каналы на многоканальных номерах<button type="button" class="help" data-tip="Дополнительная ёмкость номера для пиковых нагрузок, когда звонков особенно много." aria-label="Подробнее">?</button></span><div class="d" id="d-chan">50,83 ₽/мес за канал</div></div>
+            <div class="ctl"><span class="price-tag" id="pt-chan"></span><div class="stepper" data-num="channels"><button data-d="-1">−</button><input type="number" id="i-channels" value="0" min="0"><button data-d="1">+</button></div></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- STEP 2 -->
+      <section class="step" data-step="1">
+        <h2>Шаг 2. Опции АТС</h2>
+        <p class="hint">Дополнительные функции к выбранному тарифу. Все позиции — ежемесячная плата.</p>
+        <div class="block" id="opts-atc"></div>
+        <div class="note">Бесплатно во всех тарифах: голосовое меню, голосовая почта, факс, звонок с сайта, статистика звонков, короткая нумерация, переадресации, чёрные/белые списки, права доступа сотрудников, аудиоконференция, мелодия вызова.</div>
+      </section>
+
+      <!-- STEP 3 -->
+      <section class="step" data-step="2">
+        <h2>Шаг 3. Аналитика продвижения</h2>
+        <p class="hint">Коллтрекинг, МультиТрекинг и МультиЧат для оценки рекламы и общения с клиентами.</p>
+
+        <div class="block">
+          <div class="block-title">Статический коллтрекинг</div>
+          <div id="opts-track"></div>
+        </div>
+
+        <div class="block">
+          <div class="block-title">МультиТрекинг</div>
+          <div class="row">
+            <div class="lbl"><span class="lt">Пакет МультиТрекинга<button type="button" class="help" data-tip="Расширенная аналитика рекламы: несколько номеров, отслеживание по каналам и пакет входящих минут — чтобы точно знать, какая реклама окупается." aria-label="Подробнее">?</button></span></div>
+            <div class="ctl">
+              <select id="mt-pack">
+                <option value="">— не нужен —</option>
+                <option value="S">S · 1 номер, 1 e-mail, 250 мин</option>
+                <option value="S+">S+ · 2 номера, 2 e-mail, 400 мин</option>
+                <option value="M">M · 5 номеров, 10 e-mail, 800 мин</option>
+                <option value="L">L · 15 номеров, 30 e-mail, 2000 мин</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="lbl">Срок подключения<div class="d">Скидки: 3 мес −5%, 6 мес −10%, 12 мес −15%</div></div>
+            <div class="ctl">
+              <select id="mt-period">
+                <option value="1">1 месяц</option>
+                <option value="3">3 месяца (−5%)</option>
+                <option value="6">6 месяцев (−10%)</option>
+                <option value="12">12 месяцев (−15%)</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="lbl">Доп. e-mail для трекинга<div class="d">100 ₽/мес за e-mail</div></div>
+            <div class="ctl"><span class="price-tag" id="pt-mtmail"></span><div class="stepper" data-num="mtMail"><button data-d="-1">−</button><input type="number" id="i-mtMail" value="0" min="0"><button data-d="1">+</button></div></div>
+          </div>
+          <div class="row">
+            <div class="lbl">Клиентский номер 8800<div class="d">1000 ₽/мес за номер</div></div>
+            <div class="ctl"><span class="price-tag" id="pt-mt8800"></span><div class="stepper" data-num="mt8800"><button data-d="-1">−</button><input type="number" id="i-mt8800" value="0" min="0"><button data-d="1">+</button></div></div>
+          </div>
+          <div class="note">Минута сверх лимита пакета — 2,10 ₽. Во все пакеты включены «Попапы», виджет обратного звонка и дашборд аналитики.</div>
+        </div>
+
+        <div class="block">
+          <div class="block-title">МультиЧат</div>
+          <div class="row">
+            <div class="lbl"><span class="lt">Пакет МультиЧата<button type="button" class="help" data-tip="Онлайн-чат и мессенджеры на вашем сайте: клиенты пишут вам в удобном формате, а все обращения собираются в одном окне." aria-label="Подробнее">?</button></span><div class="d">По числу уникальных посетителей сайта / 30 дней</div></div>
+            <div class="ctl">
+              <select id="mc-pack">
+                <option value="">— не нужен —</option>
+                <option value="S">S · 2 000 посетителей</option>
+                <option value="M">M · 10 000 посетителей</option>
+                <option value="L">L · 30 000 посетителей</option>
+                <option value="XL">XL · 70 000 посетителей</option>
+                <option value="2XL">2XL · 120 000 посетителей</option>
+                <option value="3XL">3XL · 300 000 посетителей</option>
+              </select>
+            </div>
+          </div>
+          <div id="opts-mc"></div>
+        </div>
+      </section>
+
+      <!-- STEP 4 -->
+      <section class="step" data-step="3">
+        <h2>Шаг 4. Дополнительные сервисы</h2>
+        <p class="hint">SMS-визитка, речевая аналитика, голосовые кампании, голосовой робот и Колл-центр PRO.</p>
+
+        <div class="block">
+          <div class="block-title"><span class="lt">SMS-визитка<button type="button" class="help" data-tip="В SMS у клиента вместо номера отображается название вашей компании. Сообщения выглядят солиднее, их чаще открывают и доверяют." aria-label="Подробнее">?</button></span> <span style="font-weight:600;text-transform:none;letter-spacing:0;color:var(--gray-t)">· разовый платёж за пакет</span></div>
+          <div class="row">
+            <div class="lbl">Пакет SMS</div>
+            <div class="ctl">
+              <select id="sms-pack">
+                <option value="">— не нужен —</option>
+                <option value="100">100 сообщений — 355,83 ₽</option>
+                <option value="500">500 сообщений — 1 525 ₽</option>
+                <option value="1000">1000 сообщений — 2 948,33 ₽</option>
+                <option value="2000">2000 сообщений — 5 795 ₽</option>
+                <option value="5000">5000 сообщений — 13 725 ₽</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="lbl">Количество пакетов</div>
+            <div class="ctl"><div class="stepper" data-num="smsQty"><button data-d="-1">−</button><input type="number" id="i-smsQty" value="1" min="1"><button data-d="1">+</button></div></div>
+          </div>
+        </div>
+
+        <div class="block">
+          <div class="block-title"><span class="lt">Речевая аналитика<button type="button" class="help" data-tip="Программа сама переводит разговоры в текст и анализирует их: видно, о чём спрашивают клиенты и как отвечают менеджеры — без ручного прослушивания сотен звонков." aria-label="Подробнее">?</button></span> <span style="font-weight:600;text-transform:none;letter-spacing:0;color:var(--gray-t)">· ежемесячно</span></div>
+          <div class="row">
+            <div class="lbl">Пакет транскрибации и анализа</div>
+            <div class="ctl">
+              <select id="sa-pack">
+                <option value="">— не нужен —</option>
+                <option value="500">500 минут — 762,50 ₽</option>
+                <option value="1000">1000 минут — 1 423,33 ₽</option>
+                <option value="2000">2000 минут — 2 643,33 ₽</option>
+                <option value="5000">5000 минут — 6 354,17 ₽</option>
+                <option value="10000">10000 минут — 12 200 ₽</option>
+                <option value="20000">20000 минут — 22 366,67 ₽</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="block">
+          <div class="block-title"><span class="lt">Голосовые кампании<button type="button" class="help" data-tip="Массовый автоматический обзвон с голосовым сообщением — например, напомнить об акции, записи или задолженности без участия операторов." aria-label="Подробнее">?</button></span> <span style="font-weight:600;text-transform:none;letter-spacing:0;color:var(--gray-t)">· разовый платёж за пакет</span></div>
+          <div class="row">
+            <div class="lbl">Пакет минут</div>
+            <div class="ctl">
+              <select id="vc-pack">
+                <option value="">— не нужен —</option>
+                <option value="1000">1000 минут — 610 ₽</option>
+                <option value="5000">5000 минут — 2 745 ₽</option>
+                <option value="10000">10000 минут — 4 880 ₽</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <div class="block">
+          <div class="block-title"><span class="lt">Голосовой робот<button type="button" class="help" data-tip="Робот сам звонит и общается с клиентами живым голосом: подтверждает заказы, напоминает о визите, отвечает на типовые вопросы и разгружает сотрудников." aria-label="Подробнее">?</button></span> <span style="font-weight:600;text-transform:none;letter-spacing:0;color:var(--gray-t)">· разовый платёж за пакет, без НДС</span></div>
+          <div class="row">
+            <div class="lbl">Пакет минут / роботов<div class="d">Срок действия пакета — 30 дней</div></div>
+            <div class="ctl">
+              <select id="vr-pack">
+                <option value="">— не нужен —</option>
+                <option value="2000">2 000 мин · 2 робота — 7 000 ₽</option>
+                <option value="5000">5 000 мин · 5 роботов — 17 000 ₽</option>
+                <option value="10000">10 000 мин · 10 роботов — 33 000 ₽</option>
+                <option value="15000">15 000 мин · 10 роботов — 48 000 ₽</option>
+                <option value="20000">20 000 мин · 15 роботов — 62 000 ₽</option>
+                <option value="40000">40 000 мин · 20 роботов — 120 000 ₽</option>
+                <option value="50000">50 000 мин · 20 роботов — 150 000 ₽</option>
+              </select>
+            </div>
+          </div>
+          <div class="note">Стоимость пакета не включает минуту вызова — она тарифицируется по тарифному плану номера в ОАТС.</div>
+        </div>
+
+        <div class="block">
+          <div class="block-title"><span class="lt">Колл-центр PRO<button type="button" class="help" data-tip="Полноценный колл-центр: автоматический обзвон, сценарии для операторов, отчёты и интеграция с CRM — для активных продаж и поддержки." aria-label="Подробнее">?</button></span> <span style="font-weight:600;text-transform:none;letter-spacing:0;color:var(--gray-t)">· без НДС</span></div>
+          <div class="row">
+            <div class="lbl">Срок лицензии</div>
+            <div class="ctl">
+              <select id="cc-period">
+                <option value="">— не нужен —</option>
+                <option value="day">1 день — 150 ₽/мес за пользователя</option>
+                <option value="3m">3 месяца — 8 700 ₽ за пользователя</option>
+                <option value="6m">6 месяцев — 15 600 ₽ за пользователя</option>
+                <option value="12m">12 месяцев — 28 800 ₽ за пользователя</option>
+              </select>
+            </div>
+          </div>
+          <div class="row">
+            <div class="lbl">Количество пользователей</div>
+            <div class="ctl"><div class="stepper" data-num="ccUsers"><button data-d="-1">−</button><input type="number" id="i-ccUsers" value="1" min="1"><button data-d="1">+</button></div></div>
+          </div>
+          <div class="note">Тарификация начинается после 20-го звонка. «1 день» начисляется ежедневно и выставляется ежемесячно; пакеты на 3/6/12 мес — разовый платёж за период.</div>
+        </div>
+      </section>
+
+      <!-- STEP 5 FINAL -->
+      <section class="step printme" data-step="4">
+        <div class="print-head">
+          <img src="assets/beeline_business_logo.png" alt="билайн бизнес">
+          <div class="ph-meta">
+            <div class="ph-title">Расчёт стоимости «Облачная АТС»</div>
+            <div class="ph-date" id="ph-date"></div>
+          </div>
+        </div>
+
+        <h2>Шаг 5. Итоговый расчёт</h2>
+        <p class="hint">Итоговая стоимость вашей конфигурации Облачной АТС.</p>
+
+        <div class="final-tot">
+          <div class="tot-box m">
+            <div class="l">Ежемесячно</div>
+            <div class="v" id="final-month">0 <small>₽/мес</small></div>
+          </div>
+          <div class="tot-box o">
+            <div class="l">Разовый платёж</div>
+            <div class="v" id="final-once">0 <small>₽</small></div>
+          </div>
+        </div>
+
+        <table class="det" id="det-table"><tbody></tbody></table>
+
+        <div class="disclaim">
+          Расчёт носит информационный характер и не является публичной офертой. Цены указаны в рублях с учётом НДС (кроме Голосового робота и Колл-центра PRO, не облагаемых НДС по пп.26 ч.2 ст.149 НК РФ) и не включают надбавку к тарифам в размере 1,2%. Источник: прайс «Облачная АТС» билайн (01-26).
+        </div>
+        <div class="print-foot">Сформировано в калькуляторе Облачной АТС · билайн бизнес</div>
+      </section>
+
+      <div class="nav noprint">
+        <button class="btn btn-ghost" id="btn-prev" disabled>← Назад</button>
+        <button class="btn btn-prim" id="btn-next">Далее →</button>
+      </div>
+    </div>
+
+    <!-- ====== RIGHT: live summary ====== -->
+    <aside class="summary noprint">
+      <div class="sh">
+        <div class="t">Ежемесячно</div>
+        <div class="big" id="sum-month">0 <small>₽/мес</small></div>
+      </div>
+      <div class="sb" id="sum-body"></div>
+      <div class="onetime"><span>Разовый платёж</span><b id="sum-once">0 ₽</b></div>
+    </aside>
+  </div>
+</div>
+
+<!-- Tooltip -->
+<div id="tip" class="tip noprint"></div>
+
+<!-- Mobile sticky total -->
+<div class="mobilebar noprint">
+  <div class="mb-l"><span>Ежемесячно</span><b id="mbar-month">0 ₽/мес</b></div>
+  <div class="mb-r" id="mbar-once-wrap" style="display:none"><span>Разово</span><b id="mbar-once">0 ₽</b></div>
+</div>
+
+<script>
+/* ---------------- DATA ---------------- */
+const PLANS = [
+  {id:'min', name:'Минимальный', fee:965.83,  numbers:2,  employees:4,  channels:10,  lines:5, extraChannel:101.67, extraLine:254.17, sip:1270.83},
+  {id:'base',name:'Базовый',     fee:1819.83, numbers:3,  employees:10, channels:20,  lines:5, extraChannel:50.83,  extraLine:254.17, sip:1270.83},
+  {id:'std', name:'Стандартный', fee:3548.17, numbers:5,  employees:20, channels:40,  lines:5, extraChannel:50.83,  extraLine:152.50, sip:762.50},
+  {id:'pro', name:'Профессиональный', fee:8123.17, numbers:10, employees:50, channels:100, lines:5, extraChannel:50.83, extraLine:152.50, sip:762.50},
+];
+const EXTRA_NUMBER = 152.50, EXTRA_EMPLOYEE = 203.33;
+
+const ATC_OPTIONS = [
+  {id:'rec',     name:'Запись и хранение разговоров', price:1525,   d:'1 Гб хранилища включено', help:'Все звонки автоматически записываются. Можно прослушать спорный разговор, проверить работу менеджеров и не упустить детали заказа.'},
+  {id:'storage', name:'Дополнительное хранилище +5 Гб', price:305,  qty:true, help:'Больше места под записи разговоров, чтобы они хранились дольше и их хватало на всех сотрудников.'},
+  {id:'crm',     name:'Коннектор для интеграции с CRM', price:904.83, help:'Звонки и клиенты сами попадают в вашу CRM: при входящем открывается карточка клиента, история сохраняется, ничего не теряется.'},
+  {id:'api',     name:'API для интеграции с внешними системами', price:508.33, help:'Возможность связать АТС с вашими программами, сайтом или сервисами под индивидуальные задачи бизнеса.'},
+  {id:'smart',   name:'«Умная» переадресация', price:305, help:'Звонок автоматически направляется нужному сотруднику — по времени суток, региону клиента или его важности. Клиент быстрее попадает «по адресу».'},
+  {id:'sip',     name:'Внешняя АТС по SIP', price:'sip', d:'Цена зависит от тарифа', help:'Подключение вашего офисного оборудования или другой телефонии к облачной АТС, чтобы всё работало в единой системе.'},
+  {id:'missed',  name:'Отчёт по пропущенным звонкам', price:410, help:'Список неотвеченных звонков с номерами и временем — чтобы вовремя перезвонить и не потерять клиента.'},
+  {id:'softphone',name:'Софтфон (за абонента)', price:101.67, qty:true, help:'Телефон прямо на компьютере или смартфоне сотрудника — звонки без покупки физических аппаратов, удобно для удалёнки.'},
+  {id:'cc5',     name:'Доп. 5 лицензий операторов Call-центра', price:508.33, qty:true, help:'Больше операторов могут одновременно работать в режиме колл-центра — для отделов продаж и поддержки с большим потоком звонков.'},
+];
+
+const TRACK_OPTIONS = [
+  {id:'tCity',  name:'Коллтрекинг — городской номер', price:870, qty:true, type:'m', help:'Показывает, из какой рекламы пришёл каждый звонок. Видно, какие каналы реально приносят клиентов, а на какие зря тратится бюджет.'},
+  {id:'t800',   name:'Коллтрекинг — номер 8-800/8-804', price:900, qty:true, type:'m', d:'+ 5 ₽/мин входящего вызова', help:'То же отслеживание рекламы, но на бесплатном для клиента номере 8-800 — звонить вам можно из любого региона бесплатно.'},
+  {id:'selCity',name:'Выбор красивого городского номера', price:300, qty:true, type:'o', help:'Возможность выбрать запоминающийся городской номер — его проще запомнить и он вызывает больше доверия.'},
+  {id:'sel800', name:'Выбор номера 8-800/8-804', price:1000, qty:true, type:'o', help:'Выбор красивого бесплатного номера 8-800 — солидно выглядит в рекламе и легко запоминается.'},
+];
+
+// Пояснения для остальных услуг (по ключу)
+const HELP = {
+  numbers:'Один многоканальный номер принимает сразу много звонков — клиенты не слышат «занято» и не уходят к конкурентам.',
+  employees:'Сколько сотрудников смогут принимать и совершать звонки через АТС со своими настройками и статистикой.',
+  lines:'Сколько разговоров может идти одновременно. Больше линий — в час пик никто не стоит в очереди на дозвон.',
+  channels:'Дополнительная ёмкость номера для пиковых нагрузок, когда звонков особенно много.',
+  mt:'Расширенная аналитика рекламы: несколько номеров, отслеживание по каналам и пакет входящих минут — чтобы точно знать, какая реклама окупается.',
+  mc:'Онлайн-чат и мессенджеры на вашем сайте: клиенты пишут вам в удобном формате, а все обращения собираются в одном окне.',
+  mcWhats:'Приём сообщений из WhatsApp прямо в общий чат — клиентам удобно писать туда, где они уже общаются.',
+  mcCallback:'Кнопка «заказать обратный звонок» на сайте: посетитель оставляет номер — система сама соединяет его с менеджером.',
+  sms:'В SMS у клиента вместо номера отображается название вашей компании. Сообщения выглядят солиднее, их чаще открывают и доверяют.',
+  sa:'Программа сама переводит разговоры в текст и анализирует их: видно, о чём спрашивают клиенты и как отвечают менеджеры — без ручного прослушивания сотен звонков.',
+  vc:'Массовый автоматический обзвон с голосовым сообщением — например, напомнить об акции, записи или задолженности без участия операторов.',
+  vr:'Робот сам звонит и общается с клиентами живым голосом: подтверждает заказы, напоминает о визите, отвечает на типовые вопросы и разгружает сотрудников.',
+  cc:'Полноценный колл-центр: автоматический обзвон, сценарии для операторов, отчёты и интеграция с CRM — для активных продаж и поддержки.',
+};
+const esc = t => String(t).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+const helpBtn = t => t ? `<button type="button" class="help" data-tip="${esc(t)}" aria-label="Подробнее">?</button>` : '';
+
+const MT = { // [1м, 3м(итого), 6м(итого), 12м(итого)]
+  'S': {label:'S', m:{1:1950, 3:5580, 6:10530, 12:19890}},
+  'S+':{label:'S+',m:{1:3150, 3:9000, 6:17010, 12:32130}},
+  'M': {label:'M', m:{1:6750, 3:19260,6:36450, 12:68850}},
+  'L': {label:'L', m:{1:16200,3:46170,6:87480, 12:165240}},
+};
+const MC = {S:1000,M:2000,L:5000,XL:7000,'2XL':13000,'3XL':20000};
+const MC_VIS = {S:'2 000',M:'10 000',L:'30 000',XL:'70 000','2XL':'120 000','3XL':'300 000'};
+
+const SMS  = {100:355.83,500:1525,1000:2948.33,2000:5795,5000:13725};
+const SA   = {500:762.50,1000:1423.33,2000:2643.33,5000:6354.17,10000:12200,20000:22366.67};
+const VC   = {1000:610,5000:2745,10000:4880};
+const VR   = {2000:7000,5000:17000,10000:33000,15000:48000,20000:62000,40000:120000,50000:150000};
+const VR_R = {2000:2,5000:5,10000:10,15000:10,20000:15,40000:20,50000:20};
+const CC   = {day:{label:'1 день',price:150,type:'m'},'3m':{label:'3 месяца',price:8700,type:'o'},'6m':{label:'6 месяцев',price:15600,type:'o'},'12m':{label:'12 месяцев',price:28800,type:'o'}};
+
+/* ---------------- STATE ---------------- */
+const S = {
+  plan:'min',
+  numbers:2, employees:4, lines:0, channels:0,
+  atc:{}, atcQty:{}, // id->bool, id->qty
+  track:{}, trackQty:{},
+  mtPack:'', mtPeriod:1, mtMail:0, mt8800:0,
+  mcPack:'', mcWhats:false, mcCallback:false,
+  smsPack:'', smsQty:1,
+  saPack:'', vcPack:'', vrPack:'',
+  ccPeriod:'', ccUsers:1,
+};
+
+/* ---------------- HELPERS ---------------- */
+const fmt = n => n.toLocaleString('ru-RU',{minimumFractionDigits:(n%1?2:0),maximumFractionDigits:2});
+const plan = () => PLANS.find(p=>p.id===S.plan);
+const $ = s => document.querySelector(s);
+const $$ = s => document.querySelectorAll(s);
+
+/* ---------------- RENDER STATIC ---------------- */
+function renderTariffs(){
+  $('#tariffs').innerHTML = PLANS.map(p=>`
+    <div class="tcard ${p.id===S.plan?'sel':''}" data-plan="${p.id}">
+      <div class="nm">${p.name}</div>
+      <div class="pr">${fmt(p.fee)} <small>₽/мес</small></div>
+      <ul>
+        <li>Номеров <b>${p.numbers}</b></li>
+        <li>Сотрудников <b>${p.employees}</b></li>
+        <li>Каналов <b>${p.channels}</b></li>
+        <li>Линий <b>${p.lines}</b></li>
+      </ul>
+    </div>`).join('');
+}
+function renderAtc(){
+  $('#opts-atc').innerHTML = ATC_OPTIONS.map(o=>{
+    const price = o.price==='sip'? plan().sip : o.price;
+    const qtyCtl = o.qty
+      ? `<div class="stepper" data-num="atcQty:${o.id}"><button data-d="-1">−</button><input type="number" id="i-atcQty-${o.id}" value="${S.atcQty[o.id]||0}" min="0"><button data-d="1">+</button></div>`
+      : `<label class="switch"><input type="checkbox" data-atc="${o.id}" ${S.atc[o.id]?'checked':''}><span class="slider"></span></label>`;
+    return `<div class="row">
+      <div class="lbl"><span class="lt">${o.name}${helpBtn(o.help)}</span><div class="d">${o.d?o.d+' · ':''}${fmt(price)} ₽/мес</div></div>
+      <div class="ctl">${qtyCtl}</div></div>`;
+  }).join('');
+}
+function renderTrack(){
+  $('#opts-track').innerHTML = TRACK_OPTIONS.map(o=>`
+    <div class="row">
+      <div class="lbl"><span class="lt">${o.name}${helpBtn(o.help)}</span><div class="d">${o.d?o.d+' · ':''}${fmt(o.price)} ₽${o.type==='m'?'/мес':' разово'}</div></div>
+      <div class="ctl"><div class="stepper" data-num="trackQty:${o.id}"><button data-d="-1">−</button><input type="number" id="i-trackQty-${o.id}" value="${S.trackQty[o.id]||0}" min="0"><button data-d="1">+</button></div></div>
+    </div>`).join('');
+}
+function renderMc(){
+  $('#opts-mc').innerHTML = `
+    <div class="row"><div class="lbl"><span class="lt">Интеграция с WhatsApp${helpBtn(HELP.mcWhats)}</span><div class="d">1000 ₽/мес</div></div>
+      <div class="ctl"><label class="switch"><input type="checkbox" data-mc="mcWhats" ${S.mcWhats?'checked':''}><span class="slider"></span></label></div></div>
+    <div class="row"><div class="lbl"><span class="lt">Обратный звонок${helpBtn(HELP.mcCallback)}</span><div class="d">10 ₽/мес</div></div>
+      <div class="ctl"><label class="switch"><input type="checkbox" data-mc="mcCallback" ${S.mcCallback?'checked':''}><span class="slider"></span></label></div></div>`;
+}
+
+/* ---------------- COMPUTE ---------------- */
+function compute(){
+  const groups = []; // {title, items:[{name, amount, type}]}
+  const p = plan();
+  let mTotal=0, oTotal=0;
+  const add = (title, name, amount, type='m') => {
+    let g = groups.find(x=>x.title===title);
+    if(!g){g={title,items:[]};groups.push(g);}
+    g.items.push({name,amount,type});
+    if(type==='m') mTotal+=amount; else oTotal+=amount;
+  };
+
+  // Tariff
+  add('Тариф', p.name+' (абон. плата)', p.fee, 'm');
+  const exN = Math.max(0,S.numbers-p.numbers); if(exN>0) add('Тариф',`Доп. номера × ${exN}`, exN*EXTRA_NUMBER,'m');
+  const exE = Math.max(0,S.employees-p.employees); if(exE>0) add('Тариф',`Доп. сотрудники × ${exE}`, exE*EXTRA_EMPLOYEE,'m');
+  if(S.lines>0) add('Тариф',`Доп. линии разговоров × ${S.lines}`, S.lines*p.extraLine,'m');
+  if(S.channels>0) add('Тариф',`Доп. каналы × ${S.channels}`, S.channels*p.extraChannel,'m');
+
+  // ATC options
+  ATC_OPTIONS.forEach(o=>{
+    const price = o.price==='sip'? p.sip : o.price;
+    if(o.qty){ const q=S.atcQty[o.id]||0; if(q>0) add('Опции АТС',`${o.name} × ${q}`, q*price,'m'); }
+    else if(S.atc[o.id]) add('Опции АТС', o.name, price,'m');
+  });
+
+  // Track
+  TRACK_OPTIONS.forEach(o=>{ const q=S.trackQty[o.id]||0; if(q>0) add('Аналитика',`${o.name} × ${q}`, q*o.price, o.type); });
+
+  // MultiTrekinng
+  if(S.mtPack && MT[S.mtPack]){
+    const per=S.mtPeriod, total=MT[S.mtPack].m[per];
+    if(per==1) add('Аналитика',`МультиТрекинг ${MT[S.mtPack].label}`, total,'m');
+    else add('Аналитика',`МультиТрекинг ${MT[S.mtPack].label} · ${per} мес (за период)`, total,'o');
+    if(S.mtMail>0) add('Аналитика',`Доп. e-mail трекинга × ${S.mtMail}`, S.mtMail*100,'m');
+    if(S.mt8800>0) add('Аналитика',`Клиентский номер 8800 × ${S.mt8800}`, S.mt8800*1000,'m');
+  }
+  // MultiChat
+  if(S.mcPack && MC[S.mcPack]){
+    add('Аналитика',`МультиЧат ${S.mcPack} (${MC_VIS[S.mcPack]} посетителей)`, MC[S.mcPack],'m');
+    if(S.mcWhats) add('Аналитика','МультиЧат — интеграция WhatsApp',1000,'m');
+    if(S.mcCallback) add('Аналитика','МультиЧат — обратный звонок',10,'m');
+  }
+
+  // SMS
+  if(S.smsPack && SMS[S.smsPack]) add('Доп. сервисы',`SMS-визитка ${S.smsPack} × ${S.smsQty}`, SMS[S.smsPack]*S.smsQty,'o');
+  // Speech analytics
+  if(S.saPack && SA[S.saPack]) add('Доп. сервисы',`Речевая аналитика ${S.saPack} мин`, SA[S.saPack],'m');
+  // Voice campaigns
+  if(S.vcPack && VC[S.vcPack]) add('Доп. сервисы',`Голосовые кампании ${S.vcPack} мин`, VC[S.vcPack],'o');
+  // Voice robot
+  if(S.vrPack && VR[S.vrPack]) add('Доп. сервисы',`Голосовой робот ${S.vrPack} мин (${VR_R[S.vrPack]} роб.)`, VR[S.vrPack],'o');
+  // Call-center PRO
+  if(S.ccPeriod && CC[S.ccPeriod]){
+    const c=CC[S.ccPeriod]; const amt=c.price*S.ccUsers;
+    add('Доп. сервисы',`Колл-центр PRO · ${c.label} × ${S.ccUsers} польз.`, amt, c.type);
+  }
+
+  return {groups, mTotal, oTotal};
+}
+
+/* ---------------- RENDER DYNAMIC ---------------- */
+function refresh(){
+  const p = plan();
+  // step1 price tags
+  const exN=Math.max(0,S.numbers-p.numbers), exE=Math.max(0,S.employees-p.employees);
+  $('#pt-num').textContent  = exN>0? '+'+fmt(exN*EXTRA_NUMBER)+' ₽':'в пакете';
+  $('#pt-emp').textContent  = exE>0? '+'+fmt(exE*EXTRA_EMPLOYEE)+' ₽':'в пакете';
+  $('#pt-line').textContent = S.lines>0? '+'+fmt(S.lines*p.extraLine)+' ₽':'5 включено';
+  $('#pt-chan').textContent = S.channels>0? '+'+fmt(S.channels*p.extraChannel)+' ₽':'—';
+  $('#d-line').textContent  = fmt(p.extraLine)+' ₽/мес за линию';
+  $('#d-chan').textContent  = fmt(p.extraChannel)+' ₽/мес за канал';
+  $('#pt-mtmail').textContent = S.mtMail>0? '+'+fmt(S.mtMail*100)+' ₽':'';
+  $('#pt-mt8800').textContent = S.mt8800>0? '+'+fmt(S.mt8800*1000)+' ₽':'';
+
+  const {groups,mTotal,oTotal} = compute();
+
+  // summary sidebar
+  $('#sum-month').innerHTML = fmt(mTotal)+' <small>₽/мес</small>';
+  $('#sum-once').textContent = fmt(oTotal)+' ₽';
+  // mobile bar
+  $('#mbar-month').textContent = fmt(mTotal)+' ₽/мес';
+  $('#mbar-once').textContent = fmt(oTotal)+' ₽';
+  $('#mbar-once-wrap').style.display = oTotal>0 ? 'block' : 'none';
+  const body = $('#sum-body');
+  if(groups.length===0 || (mTotal===0&&oTotal===0)){
+    body.innerHTML = '<div class="empty">Выберите параметры — расчёт появится здесь</div>';
+  } else {
+    body.innerHTML = groups.map(g=>`
+      <div class="sgroup">${g.title}</div>
+      ${g.items.map(it=>`<div class="sline"><span class="sn">${it.name}${it.type==='o'?' <span style="color:#caa400">⚡</span>':''}</span><span class="sv">${fmt(it.amount)} ₽</span></div>`).join('')}
+    `).join('');
+  }
+
+  // final
+  $('#final-month').innerHTML = fmt(mTotal)+' <small>₽/мес</small>';
+  $('#final-once').innerHTML  = fmt(oTotal)+' <small>₽</small>';
+  const tb = $('#det-table').querySelector('tbody');
+  let rows='';
+  groups.forEach(g=>{
+    rows+=`<tr class="cat"><td colspan="2">${g.title}</td></tr>`;
+    g.items.forEach(it=>{
+      rows+=`<tr><td>${it.name} <span style="color:var(--gray-t);font-size:11px">${it.type==='o'?'разово':'/мес'}</span></td><td>${fmt(it.amount)} ₽</td></tr>`;
+    });
+  });
+  rows+=`<tr class="cat"><td>Итого ежемесячно</td><td>${fmt(mTotal)} ₽/мес</td></tr>`;
+  if(oTotal>0) rows+=`<tr class="cat"><td>Итого разово</td><td>${fmt(oTotal)} ₽</td></tr>`;
+  tb.innerHTML = rows || '<tr><td colspan="2" class="empty">Ничего не выбрано</td></tr>';
+
+  saveState();
+}
+
+/* ---------------- NAV ---------------- */
+let cur=0; const LAST=4;
+function goStep(n){
+  if(typeof hideTip==='function') hideTip();
+  cur=Math.max(0,Math.min(LAST,n));
+  $$('.step').forEach(s=>s.classList.toggle('active', +s.dataset.step===cur));
+  $$('#steps .st').forEach(s=>{
+    const i=+s.dataset.go;
+    s.classList.toggle('active', i===cur);
+    s.classList.toggle('done', i<cur);
+  });
+  $('#btn-prev').disabled = cur===0;
+  $('#btn-next').textContent = cur===LAST? '🖨 Печать / PDF' : 'Далее →';
+  window.scrollTo({top:0,behavior:'smooth'});
+  saveState();
+}
+
+/* ---------------- EVENTS ---------------- */
+document.addEventListener('click', e=>{
+  // tariff select
+  const tc = e.target.closest('[data-plan]');
+  if(tc){
+    S.plan=tc.dataset.plan;
+    const p=plan();
+    if(S.numbers<p.numbers) S.numbers=p.numbers; $('#i-numbers').value=S.numbers;
+    if(S.employees<p.employees) S.employees=p.employees; $('#i-employees').value=S.employees;
+    renderTariffs(); renderAtc(); refresh(); return;
+  }
+  // stepper +/-
+  const sb = e.target.closest('.stepper button');
+  if(sb){
+    const wrap=sb.closest('.stepper'); const key=wrap.dataset.num; const d=+sb.dataset.d;
+    const input=wrap.querySelector('input');
+    let v=(parseInt(input.value)||0)+d;
+    const min=parseInt(input.min)||0; if(v<min)v=min;
+    // plan minimums for numbers/employees
+    if(key==='numbers') v=Math.max(v,0);
+    input.value=v; applyNum(key,v); refresh(); return;
+  }
+  // step chip nav
+  const chip=e.target.closest('#steps .st');
+  if(chip){ goStep(+chip.dataset.go); return; }
+});
+document.addEventListener('input', e=>{
+  if(e.target.matches('.stepper input')){
+    const key=e.target.closest('.stepper').dataset.num;
+    let v=parseInt(e.target.value); if(isNaN(v))v=0;
+    applyNum(key,v); refresh();
+  }
+});
+document.addEventListener('change', e=>{
+  const t=e.target;
+  if(t.dataset.atc){ S.atc[t.dataset.atc]=t.checked; refresh(); }
+  else if(t.dataset.mc){ S[t.dataset.mc]=t.checked; refresh(); }
+  else if(t.id==='mt-pack'){ S.mtPack=t.value; refresh(); }
+  else if(t.id==='mt-period'){ S.mtPeriod=+t.value; refresh(); }
+  else if(t.id==='mc-pack'){ S.mcPack=t.value; refresh(); }
+  else if(t.id==='sms-pack'){ S.smsPack=t.value; refresh(); }
+  else if(t.id==='sa-pack'){ S.saPack=t.value; refresh(); }
+  else if(t.id==='vc-pack'){ S.vcPack=t.value; refresh(); }
+  else if(t.id==='vr-pack'){ S.vrPack=t.value; refresh(); }
+  else if(t.id==='cc-period'){ S.ccPeriod=t.value; refresh(); }
+});
+function applyNum(key,v){
+  if(key.includes(':')){
+    const [grp,id]=key.split(':');
+    S[grp][id]=v;
+  } else {
+    S[key]=v;
+  }
+}
+
+$('#btn-next').addEventListener('click', ()=>{ if(cur===LAST){window.print();} else goStep(cur+1); });
+$('#btn-prev').addEventListener('click', ()=> goStep(cur-1));
+
+/* ---------------- TOOLTIPS ---------------- */
+const tip = $('#tip');
+let tipBtn = null;
+function showTip(btn){
+  tipBtn = btn;
+  tip.textContent = btn.dataset.tip;
+  tip.classList.add('show');
+  btn.classList.add('on');
+  const r = btn.getBoundingClientRect();
+  const tw = tip.offsetWidth, th = tip.offsetHeight;
+  let left = r.left + r.width/2 - tw/2;
+  left = Math.max(10, Math.min(left, window.innerWidth - tw - 10));
+  let top = r.top - th - 10;
+  if(top < 10) top = r.bottom + 10;
+  tip.style.left = left+'px';
+  tip.style.top = top+'px';
+}
+function hideTip(){ tip.classList.remove('show'); if(tipBtn){tipBtn.classList.remove('on');tipBtn=null;} }
+document.addEventListener('click', e=>{
+  const b = e.target.closest('.help');
+  if(b){ e.preventDefault(); (tipBtn===b)?hideTip():showTip(b); return; }
+  if(!e.target.closest('#tip')) hideTip();
+});
+document.addEventListener('mouseover', e=>{ const b=e.target.closest('.help'); if(b && tipBtn!==b) showTip(b); });
+document.addEventListener('mouseout', e=>{ const b=e.target.closest('.help'); if(b){ const to=e.relatedTarget; if(!to||!to.closest||!to.closest('.help')) hideTip(); } });
+window.addEventListener('scroll', hideTip, true);
+window.addEventListener('resize', hideTip);
+
+/* ---------------- PERSISTENCE ---------------- */
+const LS_KEY = 'oats_calc_v1';
+let hadSaved = false, inited = false;
+function saveState(){
+  try{ localStorage.setItem(LS_KEY, JSON.stringify({S, cur})); }catch(e){}
+  if(inited){ const rb=document.getElementById('resetbar'); if(rb) rb.style.display='flex'; }
+}
+function loadState(){
+  try{
+    const raw = localStorage.getItem(LS_KEY);
+    if(!raw) return false;
+    const d = JSON.parse(raw);
+    if(d && d.S){
+      Object.assign(S, d.S);
+      S.atc=d.S.atc||{}; S.atcQty=d.S.atcQty||{}; S.track=d.S.track||{}; S.trackQty=d.S.trackQty||{};
+    }
+    if(typeof d.cur==='number') cur=d.cur;
+    return true;
+  }catch(e){ return false; }
+}
+function syncInputs(){
+  ['numbers','employees','lines','channels','mtMail','mt8800','smsQty','ccUsers'].forEach(k=>{ const el=$('#i-'+k); if(el) el.value=S[k]; });
+  [['#mt-pack','mtPack'],['#mt-period','mtPeriod'],['#mc-pack','mcPack'],['#sms-pack','smsPack'],['#sa-pack','saPack'],['#vc-pack','vcPack'],['#cc-period','ccPeriod']].forEach(([sel,key])=>{ const el=$(sel); if(el) el.value=S[key]; });
+}
+function resetAll(){ try{ localStorage.removeItem(LS_KEY); }catch(e){} location.reload(); }
+$('#reset').addEventListener('click', resetAll);
+
+/* ---------------- INIT ---------------- */
+$('#ph-date').textContent = 'Дата расчёта: ' + new Date().toLocaleDateString('ru-RU',{day:'2-digit',month:'long',year:'numeric'});
+hadSaved = loadState();
+renderTariffs(); renderAtc(); renderTrack(); renderMc();
+syncInputs();
+refresh();
+goStep(cur);
+inited = true;
+if(hadSaved) $('#resetbar').style.display = 'flex';
+</script>
+</body>
+</html>
