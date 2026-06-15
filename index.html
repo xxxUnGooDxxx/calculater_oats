@@ -980,8 +980,12 @@ document.addEventListener('click', e=>{
   if(b){ e.preventDefault(); (tipBtn===b)?hideTip():showTip(b); return; }
   if(!e.target.closest('#tip')) hideTip();
 });
-document.addEventListener('mouseover', e=>{ const b=e.target.closest('.help'); if(b && tipBtn!==b) showTip(b); });
-document.addEventListener('mouseout', e=>{ const b=e.target.closest('.help'); if(b){ const to=e.relatedTarget; if(!to||!to.closest||!to.closest('.help')) hideTip(); } });
+// Hover только на устройствах с настоящим наведением (десктоп).
+// На тач-экранах подсказку открывает один тап (через click выше).
+if(window.matchMedia && window.matchMedia('(hover: hover)').matches){
+  document.addEventListener('mouseover', e=>{ const b=e.target.closest('.help'); if(b && tipBtn!==b) showTip(b); });
+  document.addEventListener('mouseout', e=>{ const b=e.target.closest('.help'); if(b){ const to=e.relatedTarget; if(!to||!to.closest||!to.closest('.help')) hideTip(); } });
+}
 window.addEventListener('scroll', hideTip, true);
 window.addEventListener('resize', hideTip);
 
