@@ -739,7 +739,7 @@ const HELP = {
   mt:'Расширенная аналитика рекламы: несколько номеров, отслеживание по каналам и пакет входящих минут — чтобы точно знать, какая реклама окупается.',
   mc:'Онлайн-чат и мессенджеры на вашем сайте: клиенты пишут вам в удобном формате, а все обращения собираются в одном окне.',
   mcWhats:'Приём сообщений из WhatsApp прямо в общий чат — клиентам удобно писать туда, где они уже общаются.',
-  mcCallback:'Кнопка «заказать обратный звонок» на сайте: посетитель оставляет номер — система сама соединяет его с менеджером.',
+  mcCallback:'Кнопка «заказать обратный звонок» на сайте: посетитель оставляет номер — система сама соединяет его с менеджером. Тарифицируется по 10 ₽ за минуту разговора, поэтому в ежемесячный итог не включается.',
   sms:'В SMS у клиента вместо номера отображается название вашей компании. Сообщения выглядят солиднее, их чаще открывают и доверяют.',
   sa:'Программа сама переводит разговоры в текст и анализирует их: видно, о чём спрашивают клиенты и как отвечают менеджеры — без ручного прослушивания сотен звонков.',
   vc:'Массовый автоматический обзвон с голосовым сообщением — например, напомнить об акции, записи или задолженности без участия операторов.',
@@ -827,7 +827,7 @@ function renderMc(){
   $('#opts-mc').innerHTML = `
     <div class="row"><div class="lbl"><span class="lt">Интеграция с WhatsApp${helpBtn(HELP.mcWhats)}</span><div class="d">1000 ₽/мес</div></div>
       <div class="ctl"><label class="switch"><input type="checkbox" data-mc="mcWhats" ${S.mcWhats?'checked':''}><span class="slider"></span></label></div></div>
-    <div class="row"><div class="lbl"><span class="lt">Обратный звонок${helpBtn(HELP.mcCallback)}</span><div class="d">10 ₽/мес</div></div>
+    <div class="row"><div class="lbl"><span class="lt">Обратный звонок${helpBtn(HELP.mcCallback)}</span><div class="d">10 ₽/мин</div></div>
       <div class="ctl"><label class="switch"><input type="checkbox" data-mc="mcCallback" ${S.mcCallback?'checked':''}><span class="slider"></span></label></div></div>`;
 }
 
@@ -840,7 +840,7 @@ function compute(){
     let g = groups.find(x=>x.title===title);
     if(!g){g={title,items:[]};groups.push(g);}
     g.items.push({name,amount,type,contractable});
-    if(type==='m') mTotal+=amount; else oTotal+=amount;
+    if(type==='m') mTotal+=amount; else if(type==='o') oTotal+=amount; // 'u' (за минуту) не суммируем
   };
 
   // Tariff
@@ -872,7 +872,7 @@ function compute(){
   if(S.mcPack && MC[S.mcPack]){
     add('Аналитика',`МультиЧат ${S.mcPack} (${MC_VIS[S.mcPack]} посетителей)`, MC[S.mcPack],'m');
     if(S.mcWhats) add('Аналитика','МультиЧат — интеграция WhatsApp',1000,'m');
-    if(S.mcCallback) add('Аналитика','МультиЧат — обратный звонок',10,'m');
+    if(S.mcCallback) add('Аналитика','МультиЧат — обратный звонок',10,'u');
   }
 
   // SMS
@@ -921,7 +921,7 @@ function refresh(){
   } else {
     body.innerHTML = groups.map(g=>`
       <div class="sgroup">${g.title}</div>
-      ${g.items.map(it=>`<div class="sline"><span class="sn">${it.name}${it.type==='o'?' <span style="color:#caa400">⚡</span>':''}</span><span class="sv">${fmt(it.amount)} ₽</span></div>`).join('')}
+      ${g.items.map(it=>`<div class="sline"><span class="sn">${it.name}${it.type==='o'?' <span style="color:#caa400">⚡</span>':''}</span><span class="sv">${fmt(it.amount)} ₽${it.type==='u'?'/мин':''}</span></div>`).join('')}
     `).join('');
   }
 
@@ -971,7 +971,7 @@ function refresh(){
     if(items.length===0) return;
     rows+=`<tr class="cat"><td colspan="2">${g.title}</td></tr>`;
     items.forEach(it=>{
-      rows+=`<tr><td>${it.name} <span style="color:var(--gray-t);font-size:11px">${it.type==='o'?'разово':'/мес'}</span></td><td>${fmt(it.amount)} ₽</td></tr>`;
+      rows+=`<tr><td>${it.name} <span style="color:var(--gray-t);font-size:11px">${it.type==='o'?'разово':it.type==='u'?'за минуту':'/мес'}</span></td><td>${fmt(it.amount)} ₽${it.type==='u'?'/мин':''}</td></tr>`;
     });
   });
   rows+=`<tr class="cat"><td>Итого ежемесячно${active?' (допы)':''}</td><td>${fmt(active?restMonthly:mTotal)} ₽/мес</td></tr>`;
