@@ -171,6 +171,9 @@
   .btn-prim:hover{background:var(--yellow-d)}
   .btn-ghost{background:var(--gray);color:var(--black)}
   .btn-ghost:hover{background:var(--gray-2)}
+  .btn-dl{background:#1d1d1d;color:#fff}
+  .btn-dl:hover{background:#000}
+  .btn-dl[disabled]{opacity:.6;cursor:default}
   .btn:disabled{opacity:.4;cursor:not-allowed}
 
   /* summary sidebar */
@@ -222,6 +225,9 @@
   table.det td:last-child,table.det th:last-child{text-align:right;font-weight:700;white-space:nowrap}
   table.det .cat td{background:var(--gray);font-weight:700;font-size:12px;text-transform:uppercase;letter-spacing:.5px;color:#555}
   .disclaim{font-size:11.5px;color:var(--gray-t);margin-top:18px;line-height:1.6}
+  .disclaim-links{margin-top:8px;display:flex;flex-wrap:wrap;gap:4px 16px}
+  .disclaim-links .dl-group b{color:#555}
+  .disclaim-links a{color:#0b6bcb;text-decoration:underline}
 
   /* print head (screen-hidden) */
   .print-head{display:none}
@@ -295,6 +301,17 @@
     .hero-stats{flex-wrap:wrap}
     .hero-stats .hs{flex:1 1 40%}
   }
+
+  /* режим захвата для «Скачать PDF» (html2canvas читает экранные стили) */
+  body.pdfx .step.printme{background:#fff;padding:4px 2px}
+  body.pdfx .step.printme h2,
+  body.pdfx .step.printme .hint,
+  body.pdfx .step.printme .noprint{display:none!important}
+  body.pdfx .print-head{display:flex!important;align-items:flex-end;justify-content:space-between;border-bottom:3px solid var(--yellow);padding-bottom:12px;margin-bottom:22px}
+  body.pdfx .print-head img{height:34px;width:auto}
+  body.pdfx .print-head .ph-title{font-size:17px;font-weight:800;letter-spacing:-.4px;text-align:right}
+  body.pdfx .print-head .ph-date{font-size:11px;color:#777;text-align:right;margin-top:3px}
+  body.pdfx .print-foot{display:block!important;margin-top:14px;font-size:10px;color:#888;text-align:center}
 
   @media print{
     @page{margin:14mm 14mm 16mm}
@@ -636,13 +653,19 @@
         <table class="det" id="det-table"><tbody></tbody></table>
 
         <div class="disclaim">
-          Расчёт носит информационный характер и не является публичной офертой. Цены указаны в рублях с учётом НДС (кроме Голосового робота и Колл-центра PRO, не облагаемых НДС по пп.26 ч.2 ст.149 НК РФ) и не включают надбавку к тарифам в размере 1,2%. Источник: прайс «Облачная АТС» билайн (01-26).
+          Расчёт носит информационный характер и не является публичной офертой. Цены указаны в рублях с учётом НДС (кроме Голосового робота и Колл-центра PRO, не облагаемых НДС по пп.26 ч.2 ст.149 НК РФ) и не включают надбавку к тарифам в размере 1,2%. Расчёт не включает стоимость сервисов «Этикетка» и «МАВ». Источник: прайс «Облачная АТС» билайн (01-26).
+          <div class="disclaim-links">
+            Уточнить цены и детали можно в документах:
+            <span class="dl-group"><b>Этикетка</b> — <a href="https://static.beeline.ru/upload/images/business/doc/oferta-etiketka.pdf" target="_blank" rel="noopener">оферта</a>, <a href="https://static.beeline.ru/upload/images/business/doc/10-2025-usloviya-tarifikacii-etiketka.pdf" target="_blank" rel="noopener">тарифы</a></span>
+            <span class="dl-group"><b>МАВ</b> — <a href="https://static.beeline.ru/upload/images/business/doc/oferta-mav.pdf" target="_blank" rel="noopener">оферта</a>, <a href="https://static.beeline.ru/upload/images/business/doc/13-10-2025-usloviya-tarifikacii-mav.pdf" target="_blank" rel="noopener">прайс</a></span>
+          </div>
         </div>
         <div class="print-foot">Сформировано в калькуляторе Облачной АТС · билайн бизнес</div>
       </section>
 
       <div class="nav noprint">
         <button class="btn btn-ghost" id="btn-prev" disabled>← Назад</button>
+        <button class="btn btn-dl" id="btn-dl" style="display:none">⬇ Скачать PDF</button>
         <button class="btn btn-prim" id="btn-next">Далее →</button>
       </div>
     </div>
@@ -668,6 +691,7 @@
   <div class="mb-r" id="mbar-once-wrap" style="display:none"><span>Разово</span><b id="mbar-once">0 ₽</b></div>
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.3/html2pdf.bundle.min.js" crossorigin="anonymous"></script>
 <script>
 /* ---------------- DATA ---------------- */
 const PLANS = [
@@ -962,6 +986,7 @@ function goStep(n){
   });
   $('#btn-prev').disabled = cur===0;
   $('#btn-next').textContent = cur===LAST? '🖨 Печать / PDF' : 'Далее →';
+  $('#btn-dl').style.display = cur===LAST? '' : 'none';
   window.scrollTo({top:0,behavior:'smooth'});
   saveState();
   if(inited) track('step_'+(cur+1));
@@ -1032,6 +1057,39 @@ function applyNum(key,v){
 
 $('#btn-next').addEventListener('click', ()=>{ if(cur===LAST){ track('print', {month: compute().mTotal, once: compute().oTotal}); window.print(); } else goStep(cur+1); });
 $('#btn-prev').addEventListener('click', ()=> goStep(cur-1));
+
+/* ---------------- СКАЧАТЬ PDF ---------------- */
+async function downloadPDF(){
+  const btn = $('#btn-dl');
+  if(btn.disabled) return;
+  if(typeof html2pdf === 'undefined'){ window.print(); return; } // фолбэк, если CDN не загрузился
+  const el = document.querySelector('.step.printme');
+  const c = compute();
+  track('download_pdf', {month: c.mTotal, once: c.oTotal});
+  const old = btn.textContent;
+  btn.disabled = true; btn.textContent = '⏳ Готовим PDF…';
+  if(typeof hideTip==='function') hideTip();
+  document.body.classList.add('pdfx');
+  const stamp = new Date().toLocaleDateString('ru-RU').replace(/\./g,'-');
+  try{
+    await html2pdf().set({
+      margin:[10,10,12,10],
+      filename:'Расчёт Облачная АТС '+stamp+'.pdf',
+      image:{type:'jpeg',quality:0.98},
+      html2canvas:{scale:2,useCORS:true,backgroundColor:'#ffffff',windowWidth:820},
+      jsPDF:{unit:'mm',format:'a4',orientation:'portrait'},
+      pagebreak:{mode:['css','legacy'],avoid:'tr'}
+    }).from(el).save();
+  }catch(e){
+    document.body.classList.remove('pdfx');
+    alert('Не удалось сформировать PDF. Откроем окно печати — выберите «Сохранить как PDF».');
+    window.print();
+  }finally{
+    document.body.classList.remove('pdfx');
+    btn.disabled = false; btn.textContent = old;
+  }
+}
+$('#btn-dl').addEventListener('click', downloadPDF);
 
 /* ---------------- TOOLTIPS ---------------- */
 const tip = $('#tip');
