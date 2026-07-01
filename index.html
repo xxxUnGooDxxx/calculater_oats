@@ -228,6 +228,12 @@
   .disclaim-links{margin-top:8px;display:flex;flex-wrap:wrap;gap:4px 16px}
   .disclaim-links .dl-group b{color:#555}
   .disclaim-links a{color:#0b6bcb;text-decoration:underline}
+  .disclaim-links .pdf-url{display:none;color:#0b6bcb;word-break:break-all}
+  /* в PDF/печати ссылки-картинки некликабельны — показываем URL текстом */
+  body.pdfx .disclaim-links,
+  body.pdfx .disclaim-links .dl-group{display:block;margin-top:4px}
+  body.pdfx .disclaim-links a{display:none}
+  body.pdfx .disclaim-links .pdf-url{display:inline}
 
   /* print head (screen-hidden) */
   .print-head{display:none}
@@ -352,6 +358,9 @@
     table.det tr{break-inside:avoid}
 
     .disclaim{margin-top:14px;font-size:10px;color:#555;border-top:1px solid #ddd;padding-top:10px}
+    .disclaim-links,.disclaim-links .dl-group{display:block;margin-top:4px}
+    .disclaim-links a{display:none}
+    .disclaim-links .pdf-url{display:inline;color:#0b6bcb;word-break:break-all}
     .print-foot{display:block!important;margin-top:14px;font-size:10px;color:#888;text-align:center}
   }
 </style>
@@ -656,8 +665,8 @@
           Расчёт носит информационный характер и не является публичной офертой. Цены указаны в рублях с учётом НДС (кроме Голосового робота и Колл-центра PRO, не облагаемых НДС по пп.26 ч.2 ст.149 НК РФ) и не включают надбавку к тарифам в размере 1,2%. Расчёт не включает стоимость сервисов «Этикетка» и «МАВ». Источник: прайс «Облачная АТС» билайн (01-26).
           <div class="disclaim-links">
             Уточнить цены и детали можно в документах:
-            <span class="dl-group"><b>Этикетка</b> — <a href="https://static.beeline.ru/upload/images/business/doc/oferta-etiketka.pdf" target="_blank" rel="noopener">оферта</a>, <a href="https://static.beeline.ru/upload/images/business/doc/10-2025-usloviya-tarifikacii-etiketka.pdf" target="_blank" rel="noopener">тарифы</a></span>
-            <span class="dl-group"><b>МАВ</b> — <a href="https://static.beeline.ru/upload/images/business/doc/oferta-mav.pdf" target="_blank" rel="noopener">оферта</a>, <a href="https://static.beeline.ru/upload/images/business/doc/13-10-2025-usloviya-tarifikacii-mav.pdf" target="_blank" rel="noopener">прайс</a></span>
+            <span class="dl-group"><b>Этикетка</b> — оферта: <a href="https://static.beeline.ru/upload/images/business/doc/oferta-etiketka.pdf" target="_blank" rel="noopener">открыть</a><span class="pdf-url">https://static.beeline.ru/upload/images/business/doc/oferta-etiketka.pdf</span>; тарифы: <a href="https://static.beeline.ru/upload/images/business/doc/10-2025-usloviya-tarifikacii-etiketka.pdf" target="_blank" rel="noopener">открыть</a><span class="pdf-url">https://static.beeline.ru/upload/images/business/doc/10-2025-usloviya-tarifikacii-etiketka.pdf</span></span>
+            <span class="dl-group"><b>МАВ</b> — оферта: <a href="https://static.beeline.ru/upload/images/business/doc/oferta-mav.pdf" target="_blank" rel="noopener">открыть</a><span class="pdf-url">https://static.beeline.ru/upload/images/business/doc/oferta-mav.pdf</span>; прайс: <a href="https://static.beeline.ru/upload/images/business/doc/13-10-2025-usloviya-tarifikacii-mav.pdf" target="_blank" rel="noopener">открыть</a><span class="pdf-url">https://static.beeline.ru/upload/images/business/doc/13-10-2025-usloviya-tarifikacii-mav.pdf</span></span>
           </div>
         </div>
         <div class="print-foot">Сформировано в калькуляторе Облачной АТС · билайн бизнес</div>
