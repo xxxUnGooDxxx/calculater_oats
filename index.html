@@ -1070,13 +1070,17 @@ async function downloadPDF(){
   btn.disabled = true; btn.textContent = '⏳ Готовим PDF…';
   if(typeof hideTip==='function') hideTip();
   document.body.classList.add('pdfx');
+  // Прокрутка наверх + пара кадров на перестройку layout — иначе html2canvas
+  // снимает со смещением по скроллу и отдаёт пустую страницу.
+  window.scrollTo(0,0);
+  await new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r)));
   const stamp = new Date().toLocaleDateString('ru-RU').replace(/\./g,'-');
   try{
     await html2pdf().set({
       margin:[10,10,12,10],
       filename:'Расчёт Облачная АТС '+stamp+'.pdf',
       image:{type:'jpeg',quality:0.98},
-      html2canvas:{scale:2,useCORS:true,backgroundColor:'#ffffff',windowWidth:820},
+      html2canvas:{scale:2,useCORS:true,backgroundColor:'#ffffff',scrollX:0,scrollY:0,windowWidth:document.documentElement.clientWidth},
       jsPDF:{unit:'mm',format:'a4',orientation:'portrait'},
       pagebreak:{mode:['css','legacy'],avoid:'tr'}
     }).from(el).save();
